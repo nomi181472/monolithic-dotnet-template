@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TemplateDTOs.UserDTOs
+namespace TemplateRequestModel.User
 {
-    public class RemoveUser
+    public class RequestUserChangeUserName
     {
+        public required string UserName { get; set; } 
         
     }
 }

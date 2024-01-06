@@ -8,7 +8,7 @@ namespace TemplateAPIDataAccess
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddDbServices(this IServiceCollection serviceDescriptors, IConfiguration configuration)
+        public static IServiceCollection AddDBContext(this IServiceCollection serviceDescriptors, IConfiguration configuration)
         {
             //serviceDescriptors.AddDbContext<TemplateDBContext>(options => options.UseInMemoryDatabase("database"));
 

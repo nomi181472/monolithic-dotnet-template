@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TemplateDTOs.CourseDTOs
+namespace TemplateRequestModel.User
 {
-    internal class RemoveCourse
+    internal class RequestChangePassword
     {
     }
 }

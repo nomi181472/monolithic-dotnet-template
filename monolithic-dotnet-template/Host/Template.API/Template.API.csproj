@@ -11,4 +11,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\TemplateAPIServices\TemplateAPIServices.csproj" />
+    <ProjectReference Include="..\..\Models\CommonModels\CommonUtilities\CommonUtilities.csproj" />
+    <ProjectReference Include="..\..\Models\CommonModels\CustomExceptions\CustomExceptions.csproj" />
+    <ProjectReference Include="..\..\TemplateDTOs\TemplateDTOs.csproj" />
+  </ItemGroup>
+
 </Project>
