@@ -10,11 +10,13 @@ namespace TemplateAPIServices
     {
         public static IServiceCollection AddTemplateServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddDBContext(configuration);
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICourseService, CourseService>();
 
 
-            services.AddDBContext(configuration);
+            
             return services;
         }
     }

@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+    npgtradingdb:
+      image: postgres:14.1-alpine
+      restart: always
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=mysecretpassword
+      ports:
+        - '5432:5432'
+      volumes: 
+        - npgtradingVolume:/var/lib/postgresql/data
+volumes:
+  npgtradingVolume:

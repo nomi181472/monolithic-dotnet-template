@@ -1,4 +1,6 @@
+using TemplateAPIServices;
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 
@@ -6,6 +8,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+//services
+builder.Services.AddTemplateServices(builder.Configuration);
 
 var app = builder.Build();
 

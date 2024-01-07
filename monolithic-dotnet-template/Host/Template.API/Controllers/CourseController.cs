@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CustomExceptionModel.Common;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RepoResult.Common;
 using ResponseModel.Common;
@@ -32,6 +34,10 @@ namespace Template.API.Controllers
                var result=await  _courseService.GetById(courseId);
                 return ApiResponseHelper.Convert(true, true, $"Success", HTTPStatusCode200.Ok, result);
             }
+            catch(RecordNotFoundException ex)
+            {
+                return ApiResponseHelper.Convert(true, true,ex.Message, HTTPStatusCode400.NotFound, null);
+            }
             catch (Exception e)
             {
 
@@ -47,7 +53,7 @@ namespace Template.API.Controllers
         {
             try
             {
-                var userId = "";
+                var userId = "noman";
                 bool result = await _courseService.Add(request, userId);
                 return ApiResponseHelper.Convert(true, true,  "Success", HTTPStatusCode200.Ok, result);
             }
@@ -65,7 +71,7 @@ namespace Template.API.Controllers
         {
             try
             {
-                List<ResponseCourseList> courses = new List<ResponseCourseList>();
+                var courses =await   _courseService.List();
                 return ApiResponseHelper.Convert(true, true, "", HTTPStatusCode200.Ok, courses);
             }
             catch (Exception e)
@@ -85,7 +91,7 @@ namespace Template.API.Controllers
             {
 
                 bool result = true;
-                var userId = "";
+                var userId = "noman";
                 await _courseService.Update(request,courseId,userId);
                 return ApiResponseHelper.Convert(true, true, "Success", HTTPStatusCode200.Ok, result);
             }
@@ -106,7 +112,7 @@ namespace Template.API.Controllers
             try
             {
                
-                string userId = "";
+                string userId = "noman";
                 var result=await _courseService.DeleteById(courseId, userId);
                 return ApiResponseHelper.Convert(true, true, "", HTTPStatusCode200.Ok, result);
             }

@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using RepoResult.Common;
 using ResponseModel.Common;
 using TemplateAPIServices.IServices;
-using TemplateDTOs.UserDTOs;
+
+using TemplateRequestModel.Auth;
 
 namespace Template.API.Controllers
 {
@@ -21,9 +22,10 @@ namespace Template.API.Controllers
 
         }
         [
+             Route(nameof(Login)),
             HttpPost
         ]
-        public async Task<ApiResponse> Login([FromBody]LoginUser login) {
+        public async Task<ApiResponse> Login([FromBody]RequestLogin login) {
             try
             {
                
@@ -40,10 +42,12 @@ namespace Template.API.Controllers
         }
 
         [
+            Route(nameof(Registration)),
             HttpPost
+
         ]
 
-        public async Task<ApiResponse> Registration([FromBody] AddUser user)
+        public async Task<ApiResponse> Registration([FromBody] RequestRegistration user)
         {
             try
             {

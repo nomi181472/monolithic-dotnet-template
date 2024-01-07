@@ -17,6 +17,11 @@ namespace Template.API.Controllers
             _userService = userService;
 
         }
+        [
+            Route(nameof(GetUser)),
+            HttpGet
+        ]
+
         public async Task<ApiResponse> GetUser(string userId)
         {
             try

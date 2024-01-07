@@ -51,7 +51,7 @@ namespace TemplateAPIServices.Services
                 filter => filter.Id == courseId,
                 setter => setter
                 .SetProperty(s=>s.UpdatedBy,userId)
-                .SetProperty(s => s.UpdatedDate, DateTime.Now)
+                .SetProperty(s => s.UpdatedDate, DateTime.UtcNow)
                 .SetProperty(s=>s.IsActive,false)
 
              
@@ -72,10 +72,11 @@ namespace TemplateAPIServices.Services
            if (result.Status)
             {
                 var single = result.Data.FirstOrDefault();
-                if (single != null)
+                if (single == null)
                 {
-                    throw new RecordNotFoundException($"courseId: {courseId} not found ");
+                    throw new RecordNotFoundException($"courseId: {courseId} not found");
                 }
+                
 
                 ResponseCourseGet response = new ResponseCourseGet()
                 {
@@ -98,7 +99,7 @@ namespace TemplateAPIServices.Services
 
         public   async Task<ResponseCourseList> List()
         {
-            var result= _uof.courseRepoAccess.GetAll();
+            var result= await _uof.courseRepoAccess.GetAsync(x=>x.IsActive);
             if (result.Status)
             {
                 ResponseCourseList response = new ResponseCourseList()
@@ -130,7 +131,7 @@ namespace TemplateAPIServices.Services
                filter => filter.Id == courseId,
                setter => setter
                .SetProperty(s => s.UpdatedBy, userId)
-               .SetProperty(s => s.UpdatedDate, DateTime.Now)
+               .SetProperty(s => s.UpdatedDate, DateTime.UtcNow)
                .SetProperty(s=>s.CourseName,request.CourseName)
                .SetProperty(s=>s.CourseType,request.CourseType)
                );
