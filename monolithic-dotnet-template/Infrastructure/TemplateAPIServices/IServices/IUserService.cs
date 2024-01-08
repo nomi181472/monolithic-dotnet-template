@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TemplateRequestModel.User;
+using TemplateResponseModel.UserResponse;
 
 namespace TemplateAPIServices.IServices
 {
     public interface IUserService
     {
-        Task<bool> Login (string username, string password);
-        Task<bool> Registration (RequestUserAdd  request);
+        Task<ResponseUserLogin> Login (RequestUserLogin request);
+        Task<ResponseUserRegistration> Registration (RequestUserAdd  request);
         Task<bool> ChangeUserName(RequestUserChangeUserName request, string userId);
+        Task<ResponseUserGet> GetUserById(string userId);
     }
 }

@@ -1,4 +1,5 @@
-﻿using CustomExceptionModel.Common;
+﻿
+using CustomExceptions.Common;
 using Microsoft.EntityFrameworkCore;
 using TemplateAPIDataAccess;
 using TemplateAPIDomainModel;
@@ -99,7 +100,8 @@ namespace TemplateAPIServices.Services
 
         public   async Task<ResponseCourseList> List()
         {
-            var result= await _uof.courseRepoAccess.GetAsync(x=>x.IsActive);
+            var result= await 
+                _uof.courseRepoAccess.GetAsync(x=>x.IsActive);
             if (result.Status)
             {
                 ResponseCourseList response = new ResponseCourseList()

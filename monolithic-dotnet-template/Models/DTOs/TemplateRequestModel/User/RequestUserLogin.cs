@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace TemplateRequestModel.User
 {
-    public class RequestUserAdd
+    public class RequestUserLogin
     {
-        public required string UserName { get; set; }
-       
+        public required  string UserEmail { get; set; }    
         public required string Password { get; set; }
-        public required string Email { get; set; }
     }
 }

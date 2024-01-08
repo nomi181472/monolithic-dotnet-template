@@ -1,6 +1,6 @@
 ﻿
 
-namespace CustomExceptionModel.Common
+namespace CustomExceptions.Common
 {
     [Serializable]
     public class RecordNotFoundException:Exception
