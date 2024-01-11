@@ -1,4 +1,5 @@
 ﻿
+using Crypto.AuthCrypto;
 using CustomExceptions.Common;
 using Microsoft.EntityFrameworkCore;
 
@@ -62,8 +63,7 @@ namespace TemplateAPIServices.Services
 
         public async Task<ResponseUserLogin> Login(RequestUserLogin request)
         {
-            string passwordHash = request.Password;
-            string passwordSalt = request.Password;
+            
             string email = request.UserEmail;
             var query=_uof.userRepoAccess.GetQueryable();
             if (query.Status)
@@ -72,15 +72,18 @@ namespace TemplateAPIServices.Services
                     x => x.UserEmail.ToLower().Equals(email.ToLower())
                     &&
                     x.IsActive
-                    &&
-                    x.Credential.PasswordHash.Equals(passwordHash)
-                    &&
-                    x.Credential.PasswordSalt.Equals(passwordSalt)
                     ).Include(x => x.Credential).FirstOrDefaultAsync();
                 if (data == null)
                 {
                     throw new InvalidCredentialsException("incorrect password or email");
                 }
+  
+                if(!PasswordHasher.VerifyPassword(request.Password,data.Credential.PasswordHash, data.Credential.PasswordSalt))
+                {
+                    throw new InvalidCredentialsException("email or password is incorrect");
+                }
+               
+
                 return new ResponseUserLogin()
                 {
                     IsRegistered = true,
@@ -125,9 +128,13 @@ namespace TemplateAPIServices.Services
             
         }
 
+
         private async Task<ResponseUserRegistration> AddUserAsync(RequestUserAdd request)
         {
             string userId = Guid.NewGuid().ToString();
+            byte[] salt = PasswordHasher.GenerateSalt();
+            string hashedPassword = PasswordHasher.HashPassword(request.Password, salt);
+
             UserCredential credential = new UserCredential()
             {
 
@@ -136,8 +143,8 @@ namespace TemplateAPIServices.Services
                 Id = userId,
                 IsActive = true,
                 IsArchived = false,
-                PasswordHash = request.Password,
-                PasswordSalt = request.Password,
+                PasswordHash = hashedPassword,
+                PasswordSalt = Convert.ToBase64String(salt),
                 UpdatedBy = userId,
                 UpdatedDate = DateTime.UtcNow,
                 UserId = userId,
