@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Auth.AuthServices;
+using Auth.IAuthServices;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -14,6 +16,7 @@ namespace Auth
     {
         public static IServiceCollection AuthDependencyInjection(this IServiceCollection service,IConfiguration configuration)
         {
+            service.AddScoped<IAuthTokenGenerator, AuthTokenGenerator>();
             service.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(jwt => {
                     jwt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()

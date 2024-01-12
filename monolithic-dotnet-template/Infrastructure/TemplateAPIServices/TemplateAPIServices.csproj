@@ -14,6 +14,7 @@
     <ProjectReference Include="..\..\Models\CommonModels\CustomExceptions\CustomExceptions.csproj" />
     <ProjectReference Include="..\..\Models\DTOs\TemplateRequestModel\TemplateRequestModel.csproj" />
     <ProjectReference Include="..\..\Models\DTOs\TemplateResponseModel\TemplateResponseModel.csproj" />
+    <ProjectReference Include="..\..\Utilities\Crypto\Crypto.csproj" />
     <ProjectReference Include="..\TemplateAPIInfrastructure\TemplateAPIDataAccess\TemplateAPIDataAccess.csproj" />
   </ItemGroup>
 

@@ -1,14 +1,28 @@
+using Auth;
+using ResponseModel.Common;
 using SwaggerConfiguration;
+using System.Net.Mime;
 using TemplateAPIServices;
-
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().ConfigureApiBehaviorOptions(x =>
+{
+    x.InvalidModelStateResponseFactory = context =>
+    {
+        var result = new ApiResult(context.ModelState);
+
+        result.ContentTypes.Add(MediaTypeNames.Application.Json);
+        result.ContentTypes.Add(MediaTypeNames.Application.Xml);
+        return result;
+    };
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AuthDependencyInjection(builder.Configuration);
 builder.Services.SwaggerDependencyInjection(builder.Configuration);
 
 //services
@@ -24,8 +38,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
+
 
 app.MapControllers();
 

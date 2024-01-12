@@ -26,5 +26,9 @@ namespace ResponseModel.Common
         public Object exception { get; set; } =new List<string>();
         
     }
+    public class ApiResponseToken : ApiResponse
+    {
+        public string Token { get; set; }
+    }
     
 }

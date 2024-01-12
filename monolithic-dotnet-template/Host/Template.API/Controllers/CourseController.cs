@@ -1,18 +1,18 @@
 ﻿
+using Auth.CustomAttributes;
 using CustomExceptions.Common;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using RepoResult.Common;
 using ResponseModel.Common;
 using TemplateAPIServices.IServices;
 using TemplateRequestModel.Course;
-using TemplateResponseModel.Course;
+
 
 namespace Template.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [System.Web.Mvc.Authorize]
     public class CourseController : ControllerBase
     {
         readonly ILogger<CourseController> _logger;

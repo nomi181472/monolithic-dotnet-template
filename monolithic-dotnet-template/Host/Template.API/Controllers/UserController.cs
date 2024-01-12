@@ -1,6 +1,6 @@
 ﻿
+using Auth.CustomAttributes;
 using CustomExceptions.Common;
-
 using Microsoft.AspNetCore.Mvc;
 using RepoResult.Common;
 using ResponseModel.Common;
@@ -13,6 +13,7 @@ namespace Template.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [JWTAuthorize]
     public class UserController : ControllerBase
     {
         readonly ILogger<UserController> _logger;
