@@ -1,4 +1,5 @@
 using Auth;
+using Auth.middleware;
 using ResponseModel.Common;
 using SwaggerConfiguration;
 using System.Net.Mime;
@@ -37,7 +38,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.APIKeyMiddleware();
+//app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
