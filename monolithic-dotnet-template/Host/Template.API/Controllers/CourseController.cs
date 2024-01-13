@@ -12,7 +12,7 @@ namespace Template.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [System.Web.Mvc.Authorize]
+    // [TypeFilter(typeof(APIKeyAttribute))]
     public class CourseController : ControllerBase
     {
         readonly ILogger<CourseController> _logger;

@@ -9,11 +9,14 @@ using TemplateRequestModel.User;
 using Auth.IAuthServices;
 using TemplateResponseModel.UserResponse;
 using Template.API.Helpers;
+using Auth.CustomAttributes;
 
 namespace Template.API.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
+    
+    [TypeFilter(typeof(APIKeyAttribute))]
     public class AuthenticationController : ControllerBase
     {
         readonly ILogger<AuthenticationController> _logger;
